@@ -3,7 +3,7 @@
 To start, it, use nodemon wherever you would normally use the node command:
     nodemon server
 
-
+t
 Make sure you have a separate terminal opened into mongodb file
 use:
 

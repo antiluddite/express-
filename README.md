@@ -12,6 +12,7 @@ use:
 in the mongodb folder to run.
 have that running in the background before you run node-mongoose 
 
+***
 file path (on a mac) will be: 
 /Users/<username>/Desktop/NucampFolder/5-NodeJS-Express-MongoDB/mongodb
 
@@ -20,5 +21,5 @@ install mongoose and mongoose-currency in the nucampsiteServer folder:
 
 If you have difficulties running in the terminal(saying it cannot find 'mongoose') try:
     npm install mongoose
-
+***
 

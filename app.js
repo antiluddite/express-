@@ -34,11 +34,12 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('12345-67890-09876-54321')); //any string will work here
 
 // This is where new code will go for authentication
 function auth(req, res, next) {
-    console.log(req.headers);
+    // console.log(req.headers); no need for this anymore
+    if (!req.signedCookies.user) {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
       const err = new Error('You are not authenticated!');
@@ -51,12 +52,22 @@ function auth(req, res, next) {
     const user = auth[0];
     const pass = auth[1];
     if (user === 'admin' && pass === 'password') {
-      return next(); // authorized
+        res.cookie('user', 'admin', {signed: true});
+        return next(); // authorized
     } else {
         const err = new Error('You are not authenticated!');
         res.setHeader('WWW-Authenticate', 'Basic');
         err.status = 401;
         return next(err);
+      }
+    } else {
+      if (req.signedCookies.user === 'admin') {
+        return next();
+    } else {
+        const err = new Error('You are not authenticated!');
+        err.status = 401;
+        return next(err);
+      }
     }
 }
 

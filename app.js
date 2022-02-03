@@ -6,6 +6,9 @@ var logger = require('morgan');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
+const passport = require('passport');
+const authenticate = require('./authenticate');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
 
@@ -46,43 +49,22 @@ app.use(session({
   store: new FileStore()
 }));
 
-//move here just before authorization
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-// This is where new code will go for authentication
+
 function auth(req, res, next) {
-    console.log(req.session);
-    // console.log(req.headers); no need for this anymore
-  if (!req.session.user) {
-    // const authHeader = req.headers.authorization;
-    // if (!authHeader) {
-      const err = new Error('You are not authenticated!');
-      // res.setHeader('WWW-Authenticate', 'Basic');
+  console.log(req.user);
+
+  if (!req.user) {
+      const err = new Error('You are not authenticated!');                    
       err.status = 401;
       return next(err);
-    //}
-
-    // const auth = Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
-    // const user = auth[0];
-    // const pass = auth[1];
-    // if (user === 'admin' && pass === 'password') {
-    //     req.session.user = 'admin';
-    //     return next(); // authorized
-    // } else {
-    //     const err = new Error('You are not authenticated!');
-    //     res.setHeader('WWW-Authenticate', 'Basic');
-    //     err.status = 401;
-    //     return next(err);
-    //   }
-    } else {
-      if (req.session.user === 'authenticated') {
-        return next();
-    } else {
-        const err = new Error('You are not authenticated!');
-        err.status = 401;
-        return next(err);
-      }
-    }
+  } else {
+      return next();
+  }
 }
 
 app.use(auth);

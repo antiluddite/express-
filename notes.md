@@ -41,3 +41,22 @@ To be safe, remember to stop nodemon before you install any packages to your pro
 Note: Once again, don't forget you will want to turn off Autosave, so that nodemon will only restart your server when you save manually instead of while you're in the middle of making updates. If you have been used to VS Code auto-saving for you, that means you will need to get in the habit of remembering to save your work manually!
 When using node directly from the command line instead of package.json, you can also substitute node with nodemon. In Week 1 of this course, you ran Node applications by entering node followed by the application filename into your terminal, e.g. node app. In that case, you would enter nodemon app instead.
 By default, the files watched for changes are  of .js, .json, .mjs, .coffee, and .litcoffee. For information on how to add other file extensions to the watch list, and more details on nodemon, visit the nodemon documentation.
+
+********
+workshop 3 mongo db bash terminal:
+db.users.update({"username": "admin"}, {$set: {"admin": true}});
+
+db.users.find().pretty()
+
+ "_id" : ObjectId("61fe1a1e1af80da78bec94ea"),
+        "firstname" : "robert",
+        "lastname" : "smith",
+        "admin" : true,
+        "username" : "admin",
+
+        "_id" : ObjectId("61fc6df0b451aa74e5fa425e"),
+        "firstname" : "maureen",
+        "lastname" : "oflynn",
+        "admin" : false,
+        "username" : "Momo",
+*****

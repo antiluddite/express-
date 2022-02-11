@@ -16,7 +16,7 @@ var usersRouter = require('./routes/user');
 const campsiteRouter = require('./routes/campsiteRouter');
 const promotionRouter = require('./routes/promotionRouter');
 const partnerRouter = require('./routes/partnerRouter');
-const uploadRouter = require('./routes/uploadRouter')
+const uploadRouter = require('./routes/uploadRouter');
 
 const mongoose = require('mongoose');
 
@@ -65,7 +65,7 @@ app.use(passport.initialize());
 // app.use(passport.session());
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 
 // function auth(req, res, next) {
 //   console.log(req.user);
@@ -88,7 +88,7 @@ app.use('/promotions', promotionRouter);
 app.use('/partners', partnerRouter);
 app.use('/imageUpload', uploadRouter);
 
-// catch 404 and forward to errorsr handler
+// catch 404 and forward to errors handler
 app.use(function(req, res, next) {
   next(createError(404));
 });

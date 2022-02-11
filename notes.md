@@ -60,3 +60,11 @@ db.users.find().pretty()
         "admin" : false,
         "username" : "Momo",
 *****
+to access your mongo shell:
+     mongo
+
+     use nucampsite
+
+     db.users.find().pretty()
+
+     db.users.update({"username":"admin}, {$set:{"admin": true}});

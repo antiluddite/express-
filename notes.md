@@ -68,3 +68,8 @@ to access your mongo shell:
      db.users.find().pretty()
 
      db.users.update({"username":"admin}, {$set:{"admin": true}});
+
+
+****
+user NOT users!!!!!!!!!!
+     https://localhost:3443/user/facebook/token
